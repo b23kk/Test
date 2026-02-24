@@ -74,3 +74,31 @@ Write-Host " Show Services"
 Write-Host '[3]' -ForegroundColor Cyan -NoNewline
 Write-Host " Exit"
 Write-Host "====================" -ForegroundColor DarkGray
+
+$Chose = Read-Host "Choose an Option"
+
+switch ($Choose) {
+    "1" { 
+        Write-Host "Disabling: " -NoNewline
+        Write-Host "$DisableServices" -ForegroundColor blue
+        foreach ($Service in $DisableServices) {
+            $service = Get-Service -Name $Service -ErrorAction SilentlyContinue
+        }
+        "2" { 
+            Write-Host "Showing Services"
+            foreach ($Service in $DisableServices) {
+                $service = Get-Service -Name $Service -ErrorAction SilentlyContinue
+                if ($service) {
+                    Write-Host "$($service.Name) - $($service.Status)" -ForegroundColor blue
+                } else {
+                    Write-Host "$Service - Not Found" -ForegroundColor red
+                }
+            }
+        }
+        "3" { 
+            Write-Host "Exiting..."
+            Start-Sleep -Seconds 2
+            exit
+        }
+    }
+}
