@@ -1,73 +1,76 @@
-# ===============================
-# Simple Service Manager
-# Run PowerShell as Administrator
-# ===============================
-
 Clear-Host
 
-# Services to disable
-$DisableServices = @(
-    "edgeupdate"
-    "edgeupdatem"
-    "Rockstar Service"
-    "XblAuthManager"
-    "XboxGipSvc"
-    "XblGameSave"
-    "brave"
-    "bravem"
+$DisableServices = @( 
+    "AMD Crash Defender Service"
+    "AMD External Events Utility"
+    "DiagTrack"
+    "dmwappushservice" 
+    "lfsvc" 
+    "MapsBroker"
+    "NetTcpPortSharing" 
+    "RemoteAccess" 
+    "RemoteRegistry" 
+    "SharedAccess" 
+    "TrkWks" 
+    "WbioSrvc" 
+    "ndu" 
+    "WerSvc" 
+    "Spooler" 
+    "Fax" 
+    "fhsvc" 
+    "gupdate" 
+    "gupdatem" 
+    "stisvc" 
+    "AJRouter" 
+    "MSDTC" 
+    "WpcMonSvc" 
+    "PhoneSvc" 
+    "PcaSvc" 
+    "WPDBusEnum" 
+    "seclogon" 
+    "lmhosts" 
+    "wisvc" 
+    "FontCache" 
+    "RetailDemo" 
+    "ALG" 
+    "SCardSvr" 
+    "SCPolicySvc" 
+    "ScDeviceEnum" 
+    "MessagingService_34048" 
+    "EntAppSvc" 
+    "Browser" 
+    "BDESVC" 
+    "iphlpsvc" 
+    "edgeupdate" 
+    "MicrosoftEdgeElevationService" 
+    "edgeupdatem" 
+    "SEMgrSvc" 
+    "PerfHost" 
+    "BcastDVRUserService_48486de" 
+    "WpnService" 
+    "DoSvc" 
+    "SNMPTrap" 
+    "SECOMNService" 
+    "autotimesvc" 
+    "tzautoupdate" 
+    "BcastDVRUserService_34048" 
+    "PenService_34048" 
+    "tapisrv" 
+    "HvHost" 
+    "vmickvpexchange" 
+    "vmicguestinterface" 
+    "vmicshutdown" 
+    "vmicheartbeat" 
+    "vmicvmsession" 
+    "vmicrdv" 
+    "vmictimesync"
 )
 
-# Menu
-Write-Host "==============================" -ForegroundColor DarkGray
-Write-Host "[1]" -ForegroundColor Blue -NoNewline
-Write-Host " Stop listed services"
-Write-Host "[2]" -ForegroundColor Blue -NoNewline
-Write-Host " Show services list"
-Write-Host "[0]" -ForegroundColor Blue -NoNewline
+Write-Host "====================" -ForegroundColor DarkGray
+Write-Host "[1]" -ForegroundColor Cyan -NoNewline
+Write-Host " Disable Services" 
+Write-Host "[2]" -ForegroundColor Cyan -NoNewline
+Write-Host " Show Services"
+Write-Host '[3]' -ForegroundColor Cyan -NoNewline
 Write-Host " Exit"
-Write-Host "==============================" -ForegroundColor DarkGray
-
-$choice = Read-Host "Choose an option"
-
-switch ($choice) {
-
-    "1" {
-        Write-Host "`nStopping services..." -ForegroundColor Cyan
-
-        foreach ($svc in $DisableServices) {
-
-            $service = Get-Service -Name $svc -ErrorAction SilentlyContinue
-
-            if ($service) {
-                if ($service.Status -ne "Stopped") {
-                    #Stop-Service -Name $svc -Force
-                    Write-Host "Stopped: $svc" -ForegroundColor Green
-                } else {
-                    Write-Host "Already stopped: $svc" -ForegroundColor Yellow
-                }
-            } else {
-                Write-Host "Not found: $svc" -ForegroundColor Red
-            }
-        }
-
-        Pause
-    }
-
-    "2" {
-        Write-Host "`nServices list:" -ForegroundColor Cyan
-        foreach ($svc in $DisableServices) {
-            Write-Host "- $svc"
-        }
-        Pause
-    }
-
-    "0" {
-        Write-Host "Exiting..." -ForegroundColor Gray
-        exit
-    }
-
-    default {
-        Write-Host "Invalid option!" -ForegroundColor Red
-        Pause
-    }
-}
+Write-Host "====================" -ForegroundColor DarkGray
